@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogos</title>
+</head>
+<body>
+    <h1>Lista de Jogos</h1>
+    <ul id="jogos-list"></ul>
+<table>
+   <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Gênero</th>
+            <th>Plataforma</th>
+            <th>Ano de Lançamento</th>
+        </tr>
+    </thead>
+
+    <tbody id="tabelaJogos">
+
+    </tbody>
+</table>
+
+    <script> fetch("/jogos")
+.then(res => res.json())
+.then(jogos => {
+
+    const tabela = document.getElementById("tabelaJogos");
+
+    jogos.forEach(jogo => {
+
+        tabela.innerHTML += `
+            <tr>
+                <td>${jogo.id_jogo}</td>
+                <td>${jogo.nome}</td>
+                <td>${jogo.genero}</td>
+                <td>${jogo.plataforma}</td>
+                <td>${jogo.ano_lancamento}</td>
+            </tr>
+        `;
+
+    });
+
+})
+.catch(erro => {
+    console.log(erro);
+    alert("Erro ao carregar os jogos.");
+});
+    </script>
+</body>
+</html>

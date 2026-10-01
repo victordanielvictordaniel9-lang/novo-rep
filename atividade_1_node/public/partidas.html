@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partidas</title>
+</head>
+<body>
+    <h1>Lista de Partidas</h1>
+    <ul id="partidas-list"></ul>
+
+    <table>
+<thead>
+        <tr>
+            <th>id_partida</th>
+            <th>id_jogador</th>
+            <th>id_jogo</th>
+            <th>pontuacao</th>
+            <th>data_partida</th>
+        </tr>
+    </thead>
+
+    <tbody id="tabelaPartidas">
+
+    </tbody>
+</table>
+
+    <script>
+        fetch("/partidas")
+.then(res => res.json())
+.then(partidas => {
+
+    const tabela = document.getElementById("tabelaPartidas");
+
+    partidas.forEach(partida => {
+
+        tabela.innerHTML += `
+            <tr>
+                <td>${partida.id_partida}</td>
+                <td>${partida.id_jogador}</td>
+                <td>${partida.id_jogo}</td>
+                <td>${partida.pontuacao}</td>
+                <td>${partida.data_partida}</td>
+            </tr>
+        `;
+
+    });
+
+})
+.catch(erro => {
+    console.log(erro);
+    alert("Erro ao carregar as partidas.");
+});
+    </script>
+</body>
+</html>
+
+<body>
+    
+</body>
+</html>

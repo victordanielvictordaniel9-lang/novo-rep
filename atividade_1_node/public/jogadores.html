@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogadores</title>
+</head>
+<body>
+    <h1>Lista de Jogadores</h1>
+    <ul id="jogadores-list"></ul>
+<table>
+   <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Nickname</th>
+            <th>Email</th>
+            <th>Nível</th>
+        </tr>
+    </thead>
+
+    <tbody id="tabelaJogadores">
+
+    </tbody>
+</table>
+
+    <script>
+    fetch("/jogadores").then(res => res.json()).then(jogadores => {
+
+    const tabela = document.getElementById("tabelaJogadores");
+
+    jogadores.forEach(jogador => {
+
+        tabela.innerHTML += `
+            <tr>
+                <td>${jogador.id_jogador}</td>
+                <td>${jogador.nome}</td>
+                <td>${jogador.nickname}</td>
+                <td>${jogador.email}</td>
+                <td>${jogador.nivel}</td>
+            </tr>
+        `;
+
+    });
+
+})
+.catch(erro => {
+    console.log(erro);
+    alert("Erro ao carregar os jogadores.");
+});
+    </script>
+</body>
+</html>
